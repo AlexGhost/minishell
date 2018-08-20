@@ -6,7 +6,7 @@
 #    By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/03 17:57:46 by acourtin          #+#    #+#              #
-#    Updated: 2018/08/20 15:10:52 by acourtin         ###   ########.fr        #
+#    Updated: 2018/08/20 15:27:47 by acourtin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,5 +37,8 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@echo "\033[31mSuppression - $(NAME)\033[0m"
+
+run: re
+	./$(NAME)
 
 re: fclean $(NAME)
