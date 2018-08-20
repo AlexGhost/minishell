@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/20 16:15:36 by acourtin         ###   ########.fr       */
+/*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
+/*   Updated: 2018/08/20 16:00:40 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-void		loopshell(char *line, int *ex)
-{
-	ft_putstr(">>");
-	line = ft_memalloc(sizeof(char) * 4096);
-	read(STDIN_FILENO, line, 4096);
-	read_command(line, ex);
-}
+# include "libft.h"
 
-int			main(void)
-{
-	int			ex;
-	char		*line;
+void				read_command(char *line, int *ex);
 
-	ex = 0;
-	line = NULL;
-	while (ex == 0)
-		loopshell(line, &ex);
-	return (0);
-}
+#endif
