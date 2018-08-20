@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/20 16:28:14 by acourtin         ###   ########.fr       */
+/*   Created: 2018/08/20 16:44:25 by acourtin          #+#    #+#             */
+/*   Updated: 2018/08/20 16:48:33 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
+void				ft_echo(char **tab)
+{
+	int i;
 
-void					read_command(char *line, int *ex);
-int						ft_strcmp_deb(const char *s1, const char *s2);
-
-#endif
+	i = 1;
+	while (tab[i])
+	{
+		ft_putstr(tab[i]);
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putchar('\n');
+}
