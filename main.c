@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/20 16:31:06 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/20 18:03:57 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		loopshell(char *line, int *ex)
 {
-	ft_putstr(">>");
+	ft_putstr("_>");
 	line = ft_memalloc(sizeof(char) * 4096);
 	get_next_line(STDIN_FILENO, &line);
 	read_command(line, ex);
