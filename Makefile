@@ -6,7 +6,7 @@
 #    By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/03 17:57:46 by acourtin          #+#    #+#              #
-#    Updated: 2018/08/20 16:48:13 by acourtin         ###   ########.fr        #
+#    Updated: 2018/08/20 19:56:57 by acourtin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =  minishell
 CC = gcc
 #CCFLAGS = -Wall -Wextra -Werror
 CCFLAGS = -Wall -Wextra
-SRC.C = main.c command.c ft_echo.c
+SRC.C = main.c command.c ft_echo.c ft_envv.c
 
 SRC.O 		= 	$(SRC.C:.c=.o)
 
