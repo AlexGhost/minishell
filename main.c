@@ -6,18 +6,20 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/20 19:46:55 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/21 15:31:00 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		loopshell(char *line, int *ex, t_list *envv)
+void		loopshell(int *ex, t_list *envv)
 {
+	char			*line;
+
 	ft_putstr("_>");
-	line = ft_memalloc(sizeof(char) * 4096);
 	get_next_line(STDIN_FILENO, &line);
 	read_command(line, ex, envv);
+	ft_strdel(&line);
 }
 
 void		cpy_env(char **env, t_list **envv)
@@ -50,14 +52,12 @@ void		cpy_env(char **env, t_list **envv)
 int			main(int ac, char **av, char **env)
 {
 	int			ex;
-	char		*line;
 	t_list		*envv;
 
 	ex = 0;
-	line = NULL;
 	envv = NULL;
 	cpy_env(env, &envv);
 	while (ex == 0)
-		loopshell(line, &ex, envv);
+		loopshell(&ex, envv);
 	return (0);
 }
