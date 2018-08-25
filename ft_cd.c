@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 14:39:16 by acourtin         ###   ########.fr       */
+/*   Created: 2018/08/21 14:07:35 by acourtin          #+#    #+#             */
+/*   Updated: 2018/08/21 16:02:40 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "libft.h"
+int				ft_cd(char **tab)
+{
+	int		cd;
+	char	*cdchar;
+	char	*cwd;
 
-int						ft_cd(char **tab);
-void					ft_showenvv(char **tab, t_list *envv);
-void					ft_setenv(char **tab, t_list *envv);
-void					ft_unsetenv(char **tab, t_list *envv);
-void					read_command(char *line, int *ex, t_list *envv);
-void					ft_echo(char **tab);
-
-#endif
+	cd = -55;
+	if (tab[1])
+	{
+		cd = chdir(tab[1]);
+		cdchar = ft_itoa(cd);
+		ft_putstr("code chdir = ");
+		ft_putendl(cdchar);
+		ft_strdel(&cdchar);
+	}
+	return (cd);
+}
