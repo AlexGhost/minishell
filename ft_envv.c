@@ -6,13 +6,13 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 14:52:23 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:43:43 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				ft_showenvv(char **tab, t_list *envv)
+void				ft_showenv(char **tab, t_list *envv)
 {
 	t_list			*curlist;
 
@@ -53,6 +53,64 @@ void				ft_setenv(char **tab, t_list *envv)
 	}
 }
 
+static void			del_content_one(t_list *envv, char *str)
+{
+	t_list			*curlist;
+
+	curlist = envv;
+	if (ft_strequ(curlist->content, str))
+	{
+		free(curlist->content);
+		curlist->content = NULL;
+		envv = curlist->next;
+		curlist->next = NULL;
+		free(curlist);
+	}
+}
+
+static void			del_content(t_list *envv, char *str)
+{
+	t_list			*curlist;
+	t_list			*nextlist;
+
+	del_content_one(envv, str);
+	curlist = envv;
+	nextlist = curlist->next;
+	while (curlist && nextlist)
+	{
+		if (ft_strequ(nextlist->content, str))
+		{
+			free(nextlist->content);
+			nextlist->content = NULL;
+			curlist->next = nextlist->next;
+			nextlist->next = NULL;
+			free(nextlist);
+		}
+		curlist = curlist->next;
+		if (curlist)
+			nextlist = curlist->next;
+	}
+}
+
 void				ft_unsetenv(char **tab, t_list *envv)
 {
+	t_list			*curlist;
+	char			*str;
+	int				i;
+
+	curlist = envv;
+	while (curlist)
+	{
+		i = 1;
+		while (tab[i])
+		{
+			str = ft_strjoin(tab[i], "=");
+			ft_putendl(str);
+			if (ft_strstr(curlist->content, str))
+				del_content(envv, curlist->content);
+			ft_strdel(&str);
+			i++;
+		}
+		curlist = curlist->next;
+	}
 }

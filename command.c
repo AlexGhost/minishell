@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 14:35:10 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/25 15:11:00 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void				read_command(char *line, int *ex, t_list *envv)
 		else if (ft_strcmp(tab[0], "echo") == 0)
 			ft_echo(tab);
 		else if (ft_strcmp(tab[0], "env") == 0)
-			ft_showenvv(tab, envv);
+			ft_showenv(tab, envv);
 		else if (ft_strcmp(tab[0], "setenv") == 0)
 			ft_setenv(tab, envv);
+		else if (ft_strcmp(tab[0], "unsetenv") == 0)
+			ft_unsetenv(tab, envv);
 		else if (ft_strcmp(tab[0], "cd") == 0)
 			ft_cd(tab);
 		i = 0;
