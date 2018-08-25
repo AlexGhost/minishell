@@ -6,13 +6,13 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/21 15:31:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/25 19:40:58 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		loopshell(int *ex, t_list *envv)
+static void		loopshell(int *ex, t_lstenv *envv)
 {
 	char			*line;
 
@@ -22,41 +22,60 @@ void		loopshell(int *ex, t_list *envv)
 	ft_strdel(&line);
 }
 
-void		cpy_env(char **env, t_list **envv)
+static t_lstenv		*malloc_lst(char *line)
 {
-	int		i;
-	int		j;
-	t_list	*curlist;
+	int			i;
+	int			j;
+	int			k;
+	char		*key;
+	char		*value;
 
-	j = 0;
-	curlist = NULL;
-	while (env[0][j])
-		j++;
-	if (env[0])
-		*envv = ft_lstnew(env[0], j + 1);
-	i = 1;
-	while (env[i])
-	{
-		j = 0;
-		while (env[i][j])
-			j++;
-		if (env[i])
-		{
-			curlist = ft_lstnew(env[i], j + 1);
-			ft_lsttail(envv, curlist);
-		}
+	i = 0;
+	while (line[i] != '=')
 		i++;
+	key = ft_strnew(i);
+	ft_strncpy(key, line, i);
+	i++;
+	j = i;
+	k = i;
+	while (line[i])
+		i++;
+	j = i - j;
+	value = ft_strnew(j);
+	i = 0;
+	while (line[k])
+	{
+		value[i] = line[k];
+		i++;
+		k++;
 	}
+	return (lstenv_new(key, value));
 }
 
-int			main(int ac, char **av, char **env)
+static t_lstenv		*cpy_env(char **tab)
 {
-	int			ex;
-	t_list		*envv;
+	int				i;
+	int				j;
+	t_lstenv		*envv;
+
+	i = 1;
+	envv = malloc_lst(tab[0]);
+	while (tab[i])
+	{
+		lstenv_tail(envv, malloc_lst(tab[i]));
+		i++;
+	}
+	return (envv);
+}
+
+int				main(int ac, char **av, char **env)
+{
+	int				ex;
+	t_lstenv		*envv;
 
 	ex = 0;
-	envv = NULL;
-	cpy_env(env, &envv);
+	//envv = NULL;
+	envv = cpy_env(env);
 	while (ex == 0)
 		loopshell(&ex, envv);
 	return (0);

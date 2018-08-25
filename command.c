@@ -6,13 +6,13 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 15:11:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/25 19:04:44 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void				read_command(char *line, int *ex, t_list *envv)
+void				read_command(char *line, int *ex, t_lstenv *envv)
 {
 	char		**tab;
 	int			i;
