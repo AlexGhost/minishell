@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 17:43:43 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/25 17:45:18 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void				ft_unsetenv(char **tab, t_list *envv)
 		while (tab[i])
 		{
 			str = ft_strjoin(tab[i], "=");
-			ft_putendl(str);
 			if (ft_strstr(curlist->content, str))
 				del_content(envv, curlist->content);
 			ft_strdel(&str);
