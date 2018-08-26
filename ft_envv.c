@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 15:54:56 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 16:19:17 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void				ft_showenv(char **tab, t_lstenv *envv)
 	}
 }
 
+static void			erase_node(t_lstenv *node)
+{
+	ft_strdel(&node->key);
+	ft_strdel(&node->value);
+	free(node);
+}
+
 void				ft_setenv(char **tab, t_lstenv **envv)
 {
 	int				i;
@@ -37,17 +44,14 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 		if (ft_strchr(tab[i], '='))
 		{
 			node_lst(tab[i], &tmp);
-			lstenv_tail(*envv, tmp);
+			if ((ft_strlen(tmp->key) > 0 && ft_strlen(tmp->value) > 0) \
+				&& !(ft_strchr(tmp->key, '=') || ft_strchr(tmp->value, '=')))
+				lstenv_tail(*envv, tmp);
+			else
+				erase_node(tmp);
 		}
 		i++;
 	}
-}
-
-static void			erase_node(t_lstenv *node)
-{
-	ft_strdel(&node->key);
-	ft_strdel(&node->value);
-	free(node);
 }
 
 static void			erase_node_lst(t_lstenv **envv, int c)
