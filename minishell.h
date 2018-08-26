@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 15:26:38 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 15:36:02 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct			s_lstenv
 int						ft_cd(char **tab);
 void					ft_showenv(char **tab, t_lstenv *envv);
 void					ft_setenv(char **tab, t_lstenv **envv);
-void					ft_unsetenv(char **tab, t_lstenv *envv);
+void					ft_unsetenv(char **tab, t_lstenv **envv);
 void					read_command(char *line, int *ex, t_lstenv **envv);
 void					ft_echo(char **tab);
 void					lstenv_tail(t_lstenv *lst, t_lstenv *newlst);
