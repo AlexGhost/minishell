@@ -6,13 +6,13 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 14:28:24 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 15:26:32 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		loopshell(int *ex, t_lstenv *envv)
+static void		loopshell(int *ex, t_lstenv **envv)
 {
 	char			*line;
 
@@ -35,7 +35,7 @@ static void		node_value(int k, char *line, char *value)
 	}
 }
 
-static void		node_lst(char *line, t_lstenv **env)
+void			node_lst(char *line, t_lstenv **env)
 {
 	int			i;
 	int			j;
@@ -87,6 +87,6 @@ int				main(int ac, char **av, char **env)
 	ex = 0;
 	cpy_env(env, &envv);
 	while (ex == 0)
-		loopshell(&ex, envv);
+		loopshell(&ex, &envv);
 	return (0);
 }

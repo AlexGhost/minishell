@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 14:31:47 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 15:26:56 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			free_tab(char **tab)
 	free(tab);
 }
 
-void				read_command(char *line, int *ex, t_lstenv *envv)
+void				read_command(char *line, int *ex, t_lstenv **envv)
 {
 	char			**tab;
 
@@ -37,11 +37,11 @@ void				read_command(char *line, int *ex, t_lstenv *envv)
 		else if (ft_strcmp(tab[0], "echo") == 0)
 			ft_echo(tab);
 		else if (ft_strcmp(tab[0], "env") == 0)
-			ft_showenv(tab, envv);
+			ft_showenv(tab, *envv);
 		else if (ft_strcmp(tab[0], "setenv") == 0)
 			ft_setenv(tab, envv);
 		else if (ft_strcmp(tab[0], "unsetenv") == 0)
-			ft_unsetenv(tab, envv);
+			ft_unsetenv(tab, *envv);
 		else if (ft_strcmp(tab[0], "cd") == 0)
 			ft_cd(tab);
 		free_tab(tab);
