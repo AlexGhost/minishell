@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 16:32:10 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 17:32:48 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,33 @@ void				ft_showenv(char **tab, t_lstenv *envv)
 	}
 }
 
+static void			replace_node(t_lstenv *first, t_lstenv *second)
+{
+	ft_strcpy(first->value, second->value);
+	erase_node(second);
+}
+
 void				ft_setenv(char **tab, t_lstenv **envv)
 {
 	int				i;
 	t_lstenv		*tmp;
+	t_lstenv		*dup;
 
 	i = 1;
 	while (tab[i])
 	{
+		dup = NULL;
 		if (ft_strchr(tab[i], '='))
 		{
 			node_lst(tab[i], &tmp);
 			if ((ft_strlen(tmp->key) > 0 && ft_strlen(tmp->value) > 0) \
 				&& !(ft_strchr(tmp->key, '=') || ft_strchr(tmp->value, '=')))
-				lstenv_tail(*envv, tmp);
+			{
+				if ((dup = search_key(*envv, tmp->key)))
+					replace_node(dup, tmp);
+				else
+					lstenv_tail(*envv, tmp);
+			}
 			else
 				erase_node(tmp);
 		}

@@ -6,11 +6,25 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/26 16:31:49 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 16:33:41 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 17:23:54 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_lstenv		*search_key(t_lstenv *envv, char *key)
+{
+	t_lstenv			*curlist;
+
+	curlist = envv;
+	while (curlist)
+	{
+		if (!ft_strcmp(curlist->key, key))
+			return (curlist);
+		curlist = curlist->next;
+	}
+	return (NULL);
+}
 
 void			erase_node(t_lstenv *node)
 {
