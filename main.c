@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 19:40:58 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 14:12:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_lstenv		*malloc_lst(char *line)
 	return (lstenv_new(key, value));
 }
 
-static t_lstenv		*cpy_env(char **tab)
+static void		cpy_env(char **tab, t_lstenv **env)
 {
 	int				i;
 	int				j;
@@ -65,7 +65,7 @@ static t_lstenv		*cpy_env(char **tab)
 		lstenv_tail(envv, malloc_lst(tab[i]));
 		i++;
 	}
-	return (envv);
+	*env = envv;
 }
 
 int				main(int ac, char **av, char **env)
@@ -74,8 +74,7 @@ int				main(int ac, char **av, char **env)
 	t_lstenv		*envv;
 
 	ex = 0;
-	//envv = NULL;
-	envv = cpy_env(env);
+	cpy_env(env, &envv);
 	while (ex == 0)
 		loopshell(&ex, envv);
 	return (0);
