@@ -6,16 +6,28 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 19:04:44 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 14:31:47 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void			free_tab(char **tab)
+{
+	int				i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_strdel(&tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
 void				read_command(char *line, int *ex, t_lstenv *envv)
 {
-	char		**tab;
-	int			i;
+	char			**tab;
 
 	if (*line)
 	{
@@ -32,12 +44,6 @@ void				read_command(char *line, int *ex, t_lstenv *envv)
 			ft_unsetenv(tab, envv);
 		else if (ft_strcmp(tab[0], "cd") == 0)
 			ft_cd(tab);
-		i = 0;
-		while (tab[i])
-		{
-			ft_strdel(&tab[i]);
-			i++;
-		}
-		free(tab);
+		free_tab(tab);
 	}
 }

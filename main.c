@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 14:19:03 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/26 14:28:24 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@ static void		loopshell(int *ex, t_lstenv *envv)
 	ft_strdel(&line);
 }
 
-static void		malloc_lst(char *line, t_lstenv **env)
+static void		node_value(int k, char *line, char *value)
+{
+	int i;
+
+	i = 0;
+	while (line[k])
+	{
+		value[i] = line[k];
+		i++;
+		k++;
+	}
+}
+
+static void		node_lst(char *line, t_lstenv **env)
 {
 	int			i;
 	int			j;
@@ -42,13 +55,7 @@ static void		malloc_lst(char *line, t_lstenv **env)
 		i++;
 	j = i - j;
 	value = ft_strnew(j);
-	i = 0;
-	while (line[k])
-	{
-		value[i] = line[k];
-		i++;
-		k++;
-	}
+	node_value(k, line, value);
 	*env = lstenv_new(key, value);
 	ft_strdel(&key);
 	ft_strdel(&value);
@@ -62,10 +69,10 @@ static void		cpy_env(char **tab, t_lstenv **env)
 	t_lstenv		*tmp;
 
 	i = 1;
-	malloc_lst(tab[0], &envv);
+	node_lst(tab[0], &envv);
 	while (tab[i])
 	{
-		malloc_lst(tab[i], &tmp);
+		node_lst(tab[i], &tmp);
 		lstenv_tail(envv, tmp);
 		i++;
 	}
