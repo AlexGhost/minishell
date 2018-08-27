@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 17:24:17 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 22:54:19 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int						ft_cd(char **tab);
 void					ft_showenv(char **tab, t_lstenv *envv);
 void					ft_setenv(char **tab, t_lstenv **envv);
 void					ft_unsetenv(char **tab, t_lstenv **envv);
-void					read_command(char *line, int *ex, t_lstenv **envv);
+void					read_command(char *l, int *ex, t_lstenv **envv, \
+							char *err);
 void					ft_echo(char **tab);
 void					lstenv_tail(t_lstenv *lst, t_lstenv *newlst);
 void					node_lst(char *line, t_lstenv **env);

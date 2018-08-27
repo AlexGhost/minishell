@@ -6,19 +6,19 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 15:38:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 22:53:27 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		loopshell(int *ex, t_lstenv **envv)
+static void		loopshell(int *ex, t_lstenv **envv, char *err)
 {
 	char			*line;
 
 	ft_putstr("_>");
 	get_next_line(STDIN_FILENO, &line);
-	read_command(line, ex, envv);
+	read_command(line, ex, envv, err);
 	ft_strdel(&line);
 }
 
@@ -81,11 +81,15 @@ static void		cpy_env(char **tab, t_lstenv **env)
 int				main(int ac, char **av, char **env)
 {
 	int				ex;
+	char			*error;
 	t_lstenv		*envv;
 
-	ex = 0;
+	ex = -1;
+	error = ft_strjoin("", "0");
 	cpy_env(env, &envv);
-	while (ex == 0)
-		loopshell(&ex, &envv);
+	while (ex == -1)
+		loopshell(&ex, &envv, error);
+	ft_putendl(error);
+	exit(ft_atoi(error));
 	return (0);
 }

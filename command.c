@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 15:35:54 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 22:54:30 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,25 @@ static void			free_tab(char **tab)
 	free(tab);
 }
 
-void				read_command(char *line, int *ex, t_lstenv **envv)
+static void			ft_exit(int *ex, char **tab, char *error)
+{
+	if (tab[1])
+	{
+		ft_strcpy(error, tab[1]);
+		ft_putendl(error);
+	}
+	*ex = 0;
+}
+
+void				read_command(char *l, int *ex, t_lstenv **envv, char *err)
 {
 	char			**tab;
 
-	if (*line)
+	if (*l)
 	{
-		tab = ft_strsplit(line, ' ');
+		tab = ft_strsplit(l, ' ');
 		if (ft_strcmp(tab[0], "exit") == 0)
-			*ex = 1;
+			ft_exit(ex, tab, err);
 		else if (ft_strcmp(tab[0], "echo") == 0)
 			ft_echo(tab);
 		else if (ft_strcmp(tab[0], "env") == 0)
