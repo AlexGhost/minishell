@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/27 22:54:30 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 23:00:14 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ static void			free_tab(char **tab)
 static void			ft_exit(int *ex, char **tab, char *error)
 {
 	if (tab[1])
-	{
 		ft_strcpy(error, tab[1]);
-		ft_putendl(error);
-	}
 	*ex = 0;
 }
 

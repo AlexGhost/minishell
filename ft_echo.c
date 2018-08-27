@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 16:44:25 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 17:34:49 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 22:59:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void				ft_echo(char **tab)
 	while (tab[i])
 	{
 		ft_putstr(tab[i]);
-		ft_putchar(' ');
+		if (tab[i + 1])
+			ft_putchar(' ');
 		i++;
 	}
 	if (tab[i])
