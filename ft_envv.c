@@ -6,25 +6,11 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/26 17:32:48 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 23:43:50 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void				ft_showenv(char **tab, t_lstenv *envv)
-{
-	t_lstenv			*curlist;
-
-	curlist = envv;
-	while (curlist)
-	{
-		ft_putstr(curlist->key);
-		ft_putchar('=');
-		ft_putendl(curlist->value);
-		curlist = curlist->next;
-	}
-}
 
 static void			replace_node(t_lstenv *first, t_lstenv *second)
 {
@@ -57,6 +43,28 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 				erase_node(tmp);
 		}
 		i++;
+	}
+}
+
+void				ft_showenv(char **tab, t_lstenv *envv)
+{
+	t_lstenv			*doublelst;
+	t_lstenv			*curlist;
+	t_lstenv			*prevlist;
+
+	doublelst = NULL;
+	cpy_lst(&doublelst, envv);
+	if (tab[1])
+		ft_setenv(tab, &doublelst);
+	curlist = doublelst;
+	while (curlist)
+	{
+		ft_putstr(curlist->key);
+		ft_putchar('=');
+		ft_putendl(curlist->value);
+		prevlist = curlist;
+		curlist = curlist->next;
+		erase_node(prevlist);
 	}
 }
 

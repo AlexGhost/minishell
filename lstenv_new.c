@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:25:10 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/25 19:15:20 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/08/27 23:44:21 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,21 @@ t_lstenv				*lstenv_new(char *key, char *value)
 	else
 		lst->value = ft_strcpy(lst->value, value);
 	return (lst);
+}
+
+void					cpy_lst(t_lstenv **dest, t_lstenv *src)
+{
+	t_lstenv			*curlist;
+
+	curlist = src;
+	if (curlist)
+	{
+		*dest = lstenv_new(curlist->key, curlist->value);
+		curlist = curlist->next;
+		while (curlist)
+		{
+			lstenv_tail(*dest, lstenv_new(curlist->key, curlist->value));
+			curlist = curlist->next;
+		}
+	}
 }
