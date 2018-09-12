@@ -6,13 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/27 23:34:05 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/12 14:28:58 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <unistd.h>
 # include "libft.h"
 
 typedef struct			s_lstenv
@@ -22,7 +23,7 @@ typedef struct			s_lstenv
 	struct s_lstenv		*next;
 }						t_lstenv;
 
-int						ft_cd(char **tab);
+void					ft_cd(char **tab, t_lstenv **envv);
 void					ft_showenv(char **tab, t_lstenv *envv);
 void					ft_setenv(char **tab, t_lstenv **envv);
 void					ft_unsetenv(char **tab, t_lstenv **envv);
