@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 14:07:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/12 14:29:12 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/12 16:34:28 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ void			ft_cd(char **tab, t_lstenv **envv)
 		cwd = ft_strnew(4096);
 		oldpwd = search_key(*envv, "OLDPWD");
 		pwd = search_key(*envv, "PWD");
-		getcwd(cwd, 4096);
-		ft_putendl(cwd);
-		ft_strcpy(oldpwd->value, pwd->value);
-		ft_strcpy(pwd->value, cwd);
-		ft_strdel(&cwd);
+		if (pwd && oldpwd)
+		{
+			getcwd(cwd, 4096);
+			ft_putendl(cwd);
+			ft_strdel(&oldpwd->value);
+			oldpwd->value = ft_strjoin(pwd->value, "");
+			ft_strdel(&pwd->value);
+			pwd->value = ft_strjoin(cwd, "");
+			ft_strdel(&cwd);
+		}
 	}
 }
