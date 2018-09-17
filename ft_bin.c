@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/17 22:45:38 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/18 00:18:34 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,19 @@ static void		fork_bin(char *path, char *bin, char **tab, t_lstenv **envv)
 	ft_strdel(&strr);
 }
 
+static void		megastrdel(char **paths)
+{
+	int i;
+
+	i = 0;
+	while (paths[i])
+	{
+		ft_strdel(&paths[i]);
+		i++;
+	}
+	free(paths);
+}
+
 void			ft_bin(char **tab, t_lstenv **envv)
 {
 	int				i;
@@ -91,11 +104,4 @@ void			ft_bin(char **tab, t_lstenv **envv)
 		}
 		i++;
 	}
-	i = 0;
-	while (paths[i])
-	{
-		ft_strdel(&paths[i]);
-		i++;
-	}
-	free(paths);
 }
