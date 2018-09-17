@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:51:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/12 14:20:30 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/17 20:50:41 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void				read_command(char *l, int *ex, t_lstenv **envv, char *err)
 			ft_unsetenv(tab, envv);
 		else if (ft_strcmp(tab[0], "cd") == 0)
 			ft_cd(tab, envv);
+		else
+			ft_bin(tab, envv);
 		free_tab(tab);
 	}
 }

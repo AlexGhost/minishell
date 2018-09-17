@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/12 14:28:58 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/17 21:06:25 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include <unistd.h>
+# include <dirent.h>
+# include <sys/types.h>
 # include "libft.h"
 
 typedef struct			s_lstenv
@@ -27,6 +29,7 @@ void					ft_cd(char **tab, t_lstenv **envv);
 void					ft_showenv(char **tab, t_lstenv *envv);
 void					ft_setenv(char **tab, t_lstenv **envv);
 void					ft_unsetenv(char **tab, t_lstenv **envv);
+void					ft_bin(char **tab, t_lstenv **envv);
 void					read_command(char *l, int *ex, t_lstenv **envv, \
 							char *err);
 void					ft_echo(char **tab);
