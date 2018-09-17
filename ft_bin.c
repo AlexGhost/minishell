@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/18 00:18:34 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/18 00:25:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		fork_bin(char *path, char *bin, char **tab, t_lstenv **envv)
 	pid = fork();
 	if (pid == 0)
 		execve(strr, tab, env);
-	wait(2);
+	wait(10);
 	i = 0;
 	while (env[i])
 	{
@@ -104,4 +104,5 @@ void			ft_bin(char **tab, t_lstenv **envv)
 		}
 		i++;
 	}
+	megastrdel(paths);
 }
