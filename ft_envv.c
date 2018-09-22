@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/22 16:20:12 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 18:11:51 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,25 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 	}
 }
 
+static int			ft_execenv(char **tab, t_lstenv *envv)
+{
+	int			i;
+	t_lstenv	*tmp;
+
+	i = 1;
+	cpy_lst(&tmp, envv);
+	while (tab[i])
+	{
+		if (ft_strcmp(tab[i], "env") && !ft_strchr(tab[i], '='))
+		{
+			read_command(tab[i], NULL, &tmp, NULL);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void				ft_showenv(char **tab, t_lstenv *envv)
 {
 	t_lstenv		*doublelst;
@@ -54,17 +73,19 @@ void				ft_showenv(char **tab, t_lstenv *envv)
 
 	doublelst = NULL;
 	cpy_lst(&doublelst, envv);
-	if (tab[1])
-		ft_setenv(tab, &doublelst);
-	curlist = doublelst;
-	while (curlist)
+	ft_setenv(tab, &doublelst);
+	if (!ft_execenv(tab, doublelst))
 	{
-		ft_putstr(curlist->key);
-		ft_putchar('=');
-		ft_putendl(curlist->value);
-		prevlist = curlist;
-		curlist = curlist->next;
-		erase_node(prevlist);
+		curlist = doublelst;
+		while (curlist)
+		{
+			ft_putstr(curlist->key);
+			ft_putchar('=');
+			ft_putendl(curlist->value);
+			prevlist = curlist;
+			curlist = curlist->next;
+			erase_node(prevlist);
+		}
 	}
 }
 
