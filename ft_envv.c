@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/27 23:43:50 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 16:20:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 		{
 			node_lst(tab[i], &tmp);
 			if ((ft_strlen(tmp->key) > 0 && ft_strlen(tmp->value) > 0) \
-				&& !(ft_strchr(tmp->key, '=') || ft_strchr(tmp->value, '=')))
+				&& !(ft_strchr(tmp->key, '=')))
 			{
 				if ((dup = search_key(*envv, tmp->key)))
 					replace_node(dup, tmp);
@@ -48,9 +48,9 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 
 void				ft_showenv(char **tab, t_lstenv *envv)
 {
-	t_lstenv			*doublelst;
-	t_lstenv			*curlist;
-	t_lstenv			*prevlist;
+	t_lstenv		*doublelst;
+	t_lstenv		*curlist;
+	t_lstenv		*prevlist;
 
 	doublelst = NULL;
 	cpy_lst(&doublelst, envv);
