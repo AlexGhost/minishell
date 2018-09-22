@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/22 13:13:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 13:18:17 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void		fork_bin(char *str, char **tab, t_lstenv **envv)
 		i++;
 	}
 	free(env);
+	ft_strdel(&str);
 }
 
 static void		megastrdel(char **paths)
@@ -114,18 +115,15 @@ static char		*delete_path(char *str)
 void			ft_bin(char **tab, t_lstenv **envv)
 {
 	int				i;
-	char			*tmp;
 	char			**paths;
 	char			*bin;
-	t_lstenv		*path;
 	DIR				*dir;
 	struct dirent	*dir_ent;
 
 	i = 0;
 	dir = NULL;
 	dir_ent = NULL;
-	path = search_key(*envv, "PATH");
-	paths = ft_strsplit(path->value, ':');
+	paths = ft_strsplit(search_key(*envv, "PATH")->value, ':');
 	bin = delete_path(tab[0]);
 	while (paths[i])
 	{
@@ -134,11 +132,7 @@ void			ft_bin(char **tab, t_lstenv **envv)
 		{
 			while ((dir_ent = readdir(dir)))
 				if (ft_strcmp(dir_ent->d_name, bin) == 0)
-				{
-					tmp = add_path(paths[i], bin);
-					fork_bin(tmp, tab, envv);
-					ft_strdel(&tmp);
-				}
+					fork_bin(add_path(paths[i], bin), tab, envv);
 			closedir(dir);
 		}
 		i++;
