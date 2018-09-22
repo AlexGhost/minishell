@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/18 04:17:46 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 13:02:34 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,16 @@ static char		**convert_env(t_lstenv **envv)
 	return (env);
 }
 
-static void		fork_bin(char *path, char *bin, char **tab, t_lstenv **envv)
+static void		fork_bin(char *str, char **tab, t_lstenv **envv)
 {
 	int			i;
 	int			pid;
-	char		*str;
-	char		*strr;
 	char		**env;
 
-	str = ft_strjoin(path, "/");
-	strr = ft_strjoin(str, bin);
-	ft_strdel(&str);
 	env = convert_env(envv);
 	pid = fork();
 	if (pid == 0)
-		execve(strr, tab, env);
+		execve(str, tab, env);
 	wait(NULL);
 	i = 0;
 	while (env[i])
@@ -63,7 +58,6 @@ static void		fork_bin(char *path, char *bin, char **tab, t_lstenv **envv)
 		i++;
 	}
 	free(env);
-	ft_strdel(&strr);
 }
 
 static void		megastrdel(char **paths)
@@ -79,10 +73,57 @@ static void		megastrdel(char **paths)
 	free(paths);
 }
 
+static char		*add_path(char *path, char *bin)
+{
+	char			*tmp;
+	char			*tmpp;
+
+	tmp = ft_strjoin(path, "/");
+	tmpp = ft_strjoin(tmp, bin);
+	ft_strdel(&tmp);
+	return (tmpp);
+}
+
+static char		*delete_path(char *str)
+{
+	int			i;
+	int			j;
+	int			slash;
+	char		*res;
+
+	i = 0;
+	slash = 0;
+	while (str[i])
+	{
+		if (str[i] == '/')
+			slash = i;
+		i++;
+	}
+	i = slash == 0 ? 0 : slash + 1;
+	j = 0;
+	while (str[i])
+	{
+		j++;
+		i++;
+	}
+	res = ft_strnew(j + 1);
+	i = slash == 0 ? 0 : slash + 1;
+	j = 0;
+	while (str[i])
+	{
+		res[j] = str[i];
+		i++;
+		j++;
+	}
+	return (res);
+}
+
 void			ft_bin(char **tab, t_lstenv **envv)
 {
 	int				i;
+	char			*tmp;
 	char			**paths;
+	char			*bin;
 	t_lstenv		*path;
 	DIR				*dir;
 	struct dirent	*dir_ent;
@@ -92,17 +133,23 @@ void			ft_bin(char **tab, t_lstenv **envv)
 	dir_ent = NULL;
 	path = search_key(*envv, "PATH");
 	paths = ft_strsplit(path->value, ':');
+	bin = delete_path(tab[0]);
 	while (paths[i])
 	{
 		dir = opendir(paths[i]);
 		if (dir)
 		{
 			while ((dir_ent = readdir(dir)))
-				if (ft_strcmp(dir_ent->d_name, tab[0]) == 0)
-					fork_bin(paths[i], tab[0], tab, envv);
+				if (ft_strcmp(dir_ent->d_name, bin) == 0)
+				{
+					tmp = add_path(paths[i], bin);
+					fork_bin(tmp, tab, envv);
+					ft_strdel(&tmp);
+				}
 			closedir(dir);
 		}
 		i++;
 	}
 	megastrdel(paths);
+	ft_strdel(&bin);
 }
