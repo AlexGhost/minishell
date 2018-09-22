@@ -6,11 +6,25 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 18:25:10 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/27 23:44:21 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 18:16:58 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void					free_lst(t_lstenv *lst)
+{
+	t_lstenv		*curlist;
+	t_lstenv		*prevlist;
+
+	curlist = lst;
+	while (curlist)
+	{
+		prevlist = curlist;
+		curlist = curlist->next;
+		erase_node(prevlist);
+	}
+}
 
 void					lstenv_tail(t_lstenv *lst, t_lstenv *newlst)
 {

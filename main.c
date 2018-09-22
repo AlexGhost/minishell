@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/08/27 22:59:56 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 18:18:11 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int				main(int ac, char **av, char **env)
 	cpy_env(env, &envv);
 	while (ex == -1)
 		loopshell(&ex, &envv, error);
+	free_lst(envv);
 	exit(ft_atoi(error));
 	return (0);
 }
