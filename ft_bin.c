@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/22 13:02:34 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/22 13:13:07 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static char		*add_path(char *path, char *bin)
 static char		*delete_path(char *str)
 {
 	int			i;
-	int			j;
 	int			slash;
 	char		*res;
 
@@ -100,20 +99,14 @@ static char		*delete_path(char *str)
 		i++;
 	}
 	i = slash == 0 ? 0 : slash + 1;
-	j = 0;
 	while (str[i])
-	{
-		j++;
 		i++;
-	}
-	res = ft_strnew(j + 1);
+	res = ft_strnew((i - (slash == 0 ? 0 : slash + 1)) + 1);
 	i = slash == 0 ? 0 : slash + 1;
-	j = 0;
 	while (str[i])
 	{
-		res[j] = str[i];
+		res[i - (slash == 0 ? 0 : slash + 1)] = str[i];
 		i++;
-		j++;
 	}
 	return (res);
 }
