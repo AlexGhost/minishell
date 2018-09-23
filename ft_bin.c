@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 16:45:40 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 16:52:22 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void		fork_bin(char *str, char **tab, t_lstenv **envv)
 	ft_strdel(&str);
 }
 
-static void		megastrdel(char **paths)
+static void		megastrdel(char **paths, char *bin)
 {
 	int i;
 
@@ -72,6 +72,14 @@ static void		megastrdel(char **paths)
 		i++;
 	}
 	free(paths);
+	ft_strdel(&bin);
+}
+
+static void		init_bin(int *i, DIR **dir, struct dirent **dir_ent)
+{
+	*i = 0;
+	dir = NULL;
+	dir_ent = NULL;
 }
 
 int				ft_bin(char **tab, t_lstenv **envv)
@@ -82,9 +90,7 @@ int				ft_bin(char **tab, t_lstenv **envv)
 	DIR				*dir;
 	struct dirent	*dir_ent;
 
-	i = 0;
-	dir = NULL;
-	dir_ent = NULL;
+	init_bin(&i, &dir, &dir_ent);
 	if (!search_key(*envv, "PATH"))
 		return (0);
 	paths = ft_strsplit(search_key(*envv, "PATH")->value, ':');
@@ -101,7 +107,6 @@ int				ft_bin(char **tab, t_lstenv **envv)
 		}
 		i++;
 	}
-	megastrdel(paths);
-	ft_strdel(&bin);
+	megastrdel(paths, bin);
 	return (1);
 }
