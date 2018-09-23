@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 15:12:24 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 16:35:05 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int				main(int ac, char **av, char **env)
 	ex = -1;
 	error = ft_strjoin("", "0");
 	cpy_env(env, &envv);
+	ft_putendl("=== Minishell ===");
 	while (ex == -1)
 		loopshell(&ex, &envv, error);
 	free_lst(envv);
