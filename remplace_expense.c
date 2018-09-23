@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 20:05:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:05:33 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:21:34 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,24 @@ static int		is_delim(char c)
 	return (0);
 }
 
+static void		copy_and_incr(char *strun, char *strdeux, int *i, int *j)
+{
+	strun[*i] = strdeux[*j];
+	*i += 1;
+	*j += 1;
+}
+
 char			*remplace_variable(char *line, t_lstenv **envv)
 {
 	int			i;
 	int			j;
 	int			k;
 	char		*tmp;
-	char		*newline;
+	char		*res;
 
 	i = 0;
 	k = 0;
-	newline = ft_strnew(4096);
+	res = ft_strnew(4096);
 	while (line[i])
 	{
 		if (line[i] == '$' && !is_delim(line[i + 1]))
@@ -39,30 +46,18 @@ char			*remplace_variable(char *line, t_lstenv **envv)
 			j = 0;
 			tmp = ft_strnew(4096);
 			while (!is_delim(line[i]))
-			{
-				tmp[j] = line[i];
-				i++;
-				j++;
-			}
+				copy_and_incr(tmp, line, &j, &i);
 			tmp[j] = '\0';
 			if (search_key(*envv, tmp))
 			{
 				j = 0;
 				while (search_key(*envv, tmp)->value[j])
-				{
-					newline[k] = search_key(*envv, tmp)->value[j];
-					j++;
-					k++;
-				}
+					copy_and_incr(res, search_key(*envv, tmp)->value, &k, &j);
 			}
 			ft_strdel(&tmp);
 		}
 		else
-		{
-			newline[k] = line[i];
-			k++;
-			i++;
-		}
+			copy_and_incr(res, line, &k, &i);
 	}
-	return (newline);
+	return (res);
 }
