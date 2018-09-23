@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 20:48:19 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/22 13:25:18 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 16:45:40 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void		megastrdel(char **paths)
 	free(paths);
 }
 
-void			ft_bin(char **tab, t_lstenv **envv)
+int				ft_bin(char **tab, t_lstenv **envv)
 {
 	int				i;
 	char			**paths;
@@ -85,6 +85,8 @@ void			ft_bin(char **tab, t_lstenv **envv)
 	i = 0;
 	dir = NULL;
 	dir_ent = NULL;
+	if (!search_key(*envv, "PATH"))
+		return (0);
 	paths = ft_strsplit(search_key(*envv, "PATH")->value, ':');
 	bin = delete_path(tab[0]);
 	while (paths[i])
@@ -101,4 +103,5 @@ void			ft_bin(char **tab, t_lstenv **envv)
 	}
 	megastrdel(paths);
 	ft_strdel(&bin);
+	return (1);
 }
