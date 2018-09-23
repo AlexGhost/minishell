@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:52:01 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:53:11 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		loopshell(int *ex, t_lstenv **envv, char *err)
 	get_next_line(STDIN_FILENO, &line);
 	goodline = ft_strnew(4096);
 	tmp = ft_strnew(4096);
-	remplace_variable(line, envv, tmp, goodline);
+	remplace_var(line, envv, tmp, goodline);
 	read_command(goodline, ex, envv, err);
 	ft_strdel(&line);
 	ft_strdel(&tmp);

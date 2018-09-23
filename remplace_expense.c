@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 20:05:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:50:43 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:52:55 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		search_and_copy(t_lstenv *envv, char *tmp, char *res, int *k)
 	}
 }
 
-void			remplace_variable(char *line, t_lstenv **envv, char *tmp, char *res)
+void			remplace_var(char *line, t_lstenv **envv, char *tmp, char *res)
 {
 	int			i;
 	int			j;
