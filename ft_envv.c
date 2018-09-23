@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 19:48:23 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/22 18:28:53 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 15:59:55 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,80 @@ void				ft_setenv(char **tab, t_lstenv **envv)
 	}
 }
 
+static int			get_tab_length(char **tab)
+{
+	int				i;
+	int				j;
+	int				k;
+
+	k = 0;
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_strcmp(tab[i], "env"))
+		{
+			j = 0;
+			while (tab[i][j])
+				j++;
+			k += j + 2;
+		}
+		i++;
+	}
+	return (k);
+}
+
+static char			*tab_to_str(char **tab)
+{
+	int				i;
+	int				j;
+	int				k;
+	char			*str;
+
+	str = ft_strnew(get_tab_length(tab));
+	i = 0;
+	k = 0;
+	while (tab[i])
+	{
+		if (ft_strcmp(tab[i], "env"))
+		{
+			j = 0;
+			while (tab[i][j])
+			{
+				str[k] = tab[i][j];
+				j++;
+				k++;
+			}
+			str[k] = ' ';
+			k++;
+		}
+		i++;
+	}
+	return (str);
+}
+
 static int			ft_execenv(char **tab, t_lstenv *envv)
 {
 	int			i;
 	int			r;
+	char		*str;
 	t_lstenv	*tmp;
 
 	i = 1;
 	r = 0;
-	cpy_lst(&tmp, envv);
 	while (tab[i])
 	{
-		if (ft_strcmp(tab[i], "env") && !ft_strchr(tab[i], '='))
-		{
-			read_command(tab[i], NULL, &tmp, NULL);
+		if (!ft_strchr(tab[i], '='))
 			r = 1;
-		}
 		i++;
 	}
-	free_lst(tmp);
+	str = tab_to_str(tab);
+	str[ft_strlen(str)] = '\0';
+	if (str)
+	{
+		cpy_lst(&tmp, envv);
+		read_command(str, NULL, &tmp, NULL);
+		free_lst(tmp);
+	}
 	return (r);
 }
 
