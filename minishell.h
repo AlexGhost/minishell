@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:05:52 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:50:44 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void					free_lst(t_lstenv *lst);
 int						ft_bin(char **tab, t_lstenv **envv);
 char					*add_path(char *path, char *bin);
 char					*delete_path(char *str);
-char					*remplace_variable(char *line, t_lstenv **envv);
+void					remplace_variable(char *line, t_lstenv **envv, char *tmp, char *res);
 t_lstenv				*lstenv_new(char *key, char *value);
 t_lstenv				*search_key(t_lstenv *envv, char *key);
 

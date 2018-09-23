@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:01:53 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:07:57 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/23 20:52:01 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ static void		loopshell(int *ex, t_lstenv **envv, char *err)
 {
 	char			*line;
 	char			*goodline;
+	char			*tmp;
 
 	ft_putstr("_>");
 	get_next_line(STDIN_FILENO, &line);
-	goodline = remplace_variable(line, envv);
+	goodline = ft_strnew(4096);
+	tmp = ft_strnew(4096);
+	remplace_variable(line, envv, tmp, goodline);
 	read_command(goodline, ex, envv, err);
 	ft_strdel(&line);
+	ft_strdel(&tmp);
 }
 
 static void		node_value(int k, char *line, char *value)
