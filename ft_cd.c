@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 14:07:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/14 16:41:57 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/25 15:13:42 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,22 @@ void			ft_cd(char **tab, t_lstenv **envv)
 	home = search_key(*envv, "HOME");
 	oldpwd = search_key(*envv, "OLDPWD");
 	pwd = search_key(*envv, "PWD");
-	if (tab[1])
+	if (home && oldpwd && pwd)
 	{
-		if (ft_strequ(tab[1], "-"))
-			ichdir = chdir(oldpwd->value);
+		if (tab[1])
+		{
+			if (ft_strequ(tab[1], "-"))
+				ichdir = chdir(oldpwd->value);
+				else
+				ichdir = chdir(tab[1]);
+		}
 		else
-			ichdir = chdir(tab[1]);
-	}
-	else
-		ichdir = chdir(home->value);
-	if (ichdir == 0)
-	{
-		cwd = ft_strnew(4096);
-		if (pwd && oldpwd)
-			change_env_pwd(cwd, oldpwd, pwd);
+			ichdir = chdir(home->value);
+		if (ichdir == 0)
+		{
+			cwd = ft_strnew(4096);
+			if (pwd && oldpwd)
+				change_env_pwd(cwd, oldpwd, pwd);
+		}
 	}
 }
