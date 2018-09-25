@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/21 14:07:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/25 15:53:28 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:02:47 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ void			ft_cd(char **tab, t_lstenv **envv)
 		else
 			ichdir = chdir(home->value);
 		if (ichdir == 0)
-		{
-			if (pwd && oldpwd)
-				change_env_pwd(oldpwd, pwd);
-		}
+			change_env_pwd(oldpwd, pwd);
 	}
 }
