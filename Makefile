@@ -6,7 +6,7 @@
 #    By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/03 17:57:46 by acourtin          #+#    #+#              #
-#    Updated: 2018/09/23 20:06:05 by acourtin         ###   ########.fr        #
+#    Updated: 2018/09/25 15:50:10 by acourtin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME =  minishell
 CC = gcc
 #CCFLAGS = -Wall -Wextra -Werror
 CCFLAGS = -Wall -Wextra
-SRC.C = main.c command.c ft_echo.c ft_envv.c ft_cd.c lstenv_new.c erase_node.c \
-		ft_bin.c ft_bin2.c remplace_expense.c
+SRC.C = main.c command.c ft_echo.c ft_envv.c ft_envv2.c ft_cd.c lstenv_new.c \
+		erase_node.c ft_bin.c ft_bin2.c remplace_expense.c
 
 SRC.O 		= 	$(SRC.C:.c=.o)
 

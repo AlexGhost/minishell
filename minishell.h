@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 15:47:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/09/23 20:53:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/09/25 15:49:31 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ void					erase_node(t_lstenv *node);
 void					erase_node_lst(t_lstenv **envv, int c);
 void					cpy_lst(t_lstenv **dest, t_lstenv *src);
 void					free_lst(t_lstenv *lst);
+void					remplace_var(char *line, t_lstenv **envv, char *tmp,
+							char *res);
+void					replace_node(t_lstenv *first, t_lstenv *second);
 int						ft_bin(char **tab, t_lstenv **envv);
+int						get_tab_length(char **tab);
 char					*add_path(char *path, char *bin);
 char					*delete_path(char *str);
-void					remplace_var(char *line, t_lstenv **envv, char *tmp, char *res);
+char					*tab_to_str(char **tab);
 t_lstenv				*lstenv_new(char *key, char *value);
 t_lstenv				*search_key(t_lstenv *envv, char *key);
 
